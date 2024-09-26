@@ -1,0 +1,51 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AT Новости</title>
+    <link rel="stylesheet" href="{% static 'css/stayl.css' %}">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <!-- Верхнее меню -->
+    <header>
+        <nav class="navbar">
+            <a href="{% url 'home' %}" class="logo">АТ News</a>
+            <ul class="nav-links">
+                <li><a href="{% url 'home' %}">Գլխավոր էջ</a></li>
+                {% for category in categories %}
+                    <li><a href="{% url 'category_view' category_id=category.id %}">{{ category.name }}</a></li>
+                {% endfor %}
+                <li><a href="{% url 'contact' %}">Հետադարձ կապ</a></li>
+            </ul>
+        </nav>
+    </header>
+    <hr>
+    <hr>
+    <p>A</p>
+    <p>T</p>
+    <!-- Основной блок с контентом -->
+    <main>
+
+{% block content %}
+
+{% endblock %}
+
+    </main>
+
+    <!-- Футер -->
+    <footer>
+        <p>© 2024 AT News. Все права защищены.</p>
+    </footer>
+
+    <script src="{% static 'js/scripts.js' %}"></script>
+</body>
+</html>
+
+
+
+

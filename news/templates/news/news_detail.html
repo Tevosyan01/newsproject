@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<main>
+    <article class="news-detail">
+        <h1>{{ news_item.title }}</h1>
+        <p><em>{{ news_item.date_published }}</em></p>
+        <img src="{{ news_item.image }}" alt="{{ news_item.title }}">
+        <p>{{ news_item.content }}</p>
+
+        <!-- Обёрнем количество просмотров в блок с классом для стилей -->
+        <div class="views-count">
+            <span class="views-icon">👁️</span> Просмотров: {{ news_item.views }}
+        </div>
+    </article>
+</main>
+{% endblock %}
+
+
