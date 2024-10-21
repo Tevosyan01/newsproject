@@ -1,40 +1,69 @@
 {% load static %}
 
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="{{ selected_language }}">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AT Новости</title>
+    <!-- Подключаем стили сайта -->
     <link rel="stylesheet" href="{% static 'css/stayl.css' %}">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
 
     <!-- Верхнее меню -->
     <header>
-        <nav class="navbar">
-            <a href="{% url 'home' %}" class="logo">АТ News</a>
-            <ul class="nav-links">
-                <li><a href="{% url 'home' %}">Գլխավոր էջ</a></li>
-                {% for category in categories %}
-                    <li><a href="{% url 'category_view' category_id=category.id %}">{{ category.name }}</a></li>
-                {% endfor %}
-                <li><a href="{% url 'contact' %}">Հետադարձ կապ</a></li>
-            </ul>
-        </nav>
-    </header>
-    <hr>
-    <hr>
-    <p>A</p>
-    <p>T</p>
-    <!-- Основной блок с контентом -->
-    <main>
+    <nav class="navbar">
+        <!-- Передаем параметр языка в ссылку на главную страницу -->
+        <a href="{% url 'home' language=selected_language %}" class="logo">АТ News</a>
+        <ul class="nav-links">
+            <!-- Главная страница с передачей языка -->
+            <li><a href="{% url 'home' language=selected_language %}">ԳԼԽԱՎՈՐ ԷՋ</a></li>
 
-{% block content %}
+            <!-- Ссылки на категории с передачей языка -->
+            {% for category in categories %}
+             <li><a href="{% url 'category_view' category_id=category.id language=selected_language %}">{{ category.name }}</a></li>
+            {% endfor %}
+
+            <!-- Контактная страница с передачей языка -->
+            <li><a href="{% url 'contact' language=selected_language %}">ՀԵՏԱԴԱՐՁ ԿԱՊ</a></li>
+
+            <!-- Флаги для переключения языков -->
+<li>
+    <a href="{% url 'home' language='hy' %}">
+        <img src="{% static 'image/armenia.png' %}" alt="Armenian" style="width:30px; height:auto;">
+    </a>
+</li>
+<li>
+    <a href="{% url 'home' language='ru' %}">
+        <img src="{% static 'image/russian.png' %}" alt="Russian" style="width:30px; height:auto;">
+    </a>
+</li>
+<li>
+    <a href="{% url 'home' language='en' %}">
+        <img src="{% static 'image/england.png' %}" alt="English" style="width:30px; height:auto;">
+    </a>
+</li>
+        </ul>
+    </nav>
+</header>
+
+    <br>
+    <br>
+
+{% block weather_rates %}
 
 {% endblock %}
 
+
+    <br>
+    {% block categori_title %}
+
+    {% endblock %}
+    <!-- Основной блок с контентом -->
+    <main>
+        {% block content %}
+        {% endblock %}
     </main>
 
     <!-- Футер -->
@@ -42,10 +71,7 @@
         <p>© 2024 AT News. Все права защищены.</p>
     </footer>
 
+    <!-- Скрипты -->
     <script src="{% static 'js/scripts.js' %}"></script>
 </body>
 </html>
-
-
-
-

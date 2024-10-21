@@ -11,9 +11,387 @@ class Command(BaseCommand):
     help = 'Скрапинг новостей для категорий "Мировые новости", "Спорт" и "Армения" с задержками для избежания блокировки'
 
     def handle(self, *args, **kwargs):
+        self.scrape_168am_faces()
+        self.scrape_168am_press()
+        self.scrape_168am_sports()
+        self.scrape_aravot_news_education()
+        self.scrape_aravot_news_society()
+        self.scrape_aravot_news_politics()
+        self.scrape_aravot_news_rights()
         self.scrape_world_news()
         self.scrape_sport_news()
         self.scrape_armenia_news()
+        self.scrape_more_news()
+
+
+    def scrape_168am_faces(self):
+        print("Скрапинг новостей для категории 'ԱՇԽԱՐՀ'")
+
+        list_news_urls = []
+
+        headers = {
+            'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.103 Safari/537.36'
+        }
+
+        url = 'https://168.am/section/faces'
+
+        response = requests.get(url, headers=headers)
+        soup = BeautifulSoup(response.text, 'lxml')
+
+        # Найти все ссылки на новости
+        data = soup.find_all('div', class_='realated-item clearfix')
+        for i in data:
+            news_url = i.find('a').get('href')
+            list_news_urls.append(news_url)
+
+        # Категория для новостей
+        category_sports = Category.objects.get_or_create(name='ԱՇԽԱՐՀ')[0]
+
+        # Парсим каждую новость и сохраняем в базу данных
+        for news_url in list_news_urls:
+            sleep(1)
+            response = requests.get(news_url, headers=headers)
+            soup = BeautifulSoup(response.text, 'lxml')
+
+            data = soup.find('div', class_='single-content')
+
+            # Извлечение данных с проверками
+            title_tag = data.find('h1', class_='single-title')
+            title = title_tag.text if title_tag else 'Заголовок не найден'
+
+            content_tag = data.find('div', class_='single-content-wrapper')
+            content = content_tag.text if content_tag else 'Контент не найден'
+
+            image_tag = data.find('img', class_='attachment-full size-full wp-post-image')
+            image = image_tag.get('src') if image_tag else 'Изображение не найдено'
+
+            # Проверка на дубликаты по заголовку
+            if not News.objects.filter(title=title).exists():
+                # Сохранение новости в базу данных
+                News.objects.create(
+                    title=title,
+                    content=content,
+                    image=image,
+                    category=category_sports,
+                    date_scraped=timezone.now()
+                )
+                print(f'Новость "{title}" успешно сохранена.')
+            else:
+                print(f'Новость "{title}" уже существует.')
+
+
+    def scrape_168am_press(self):
+        print("Скрапинг новостей для категории 'ԱՎԵԼԻՆ'")
+
+        list_news_urls = []
+
+        headers = {
+            'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.103 Safari/537.36'
+        }
+
+        url = 'https://168.am/section/press-am'
+
+        response = requests.get(url, headers=headers)
+        soup = BeautifulSoup(response.text, 'lxml')
+
+        # Найти все ссылки на новости
+        data = soup.find_all('div', class_='realated-item clearfix')
+        for i in data:
+            news_url = i.find('a').get('href')
+            list_news_urls.append(news_url)
+
+        # Категория для новостей
+        category_sports = Category.objects.get_or_create(name='ԱՎԵԼԻՆ')[0]
+
+        # Парсим каждую новость и сохраняем в базу данных
+        for news_url in list_news_urls:
+            sleep(1)
+            response = requests.get(news_url, headers=headers)
+            soup = BeautifulSoup(response.text, 'lxml')
+
+            data = soup.find('div', class_='single-content')
+
+            # Извлечение данных с проверками
+            title_tag = data.find('h1', class_='single-title')
+            title = title_tag.text if title_tag else 'Заголовок не найден'
+
+            content_tag = data.find('div', class_='single-content-wrapper')
+            content = content_tag.text if content_tag else 'Контент не найден'
+
+            image_tag = data.find('img', class_='attachment-full size-full wp-post-image')
+            image = image_tag.get('src') if image_tag else 'Изображение не найдено'
+
+            # Проверка на дубликаты по заголовку
+            if not News.objects.filter(title=title).exists():
+                # Сохранение новости в базу данных
+                News.objects.create(
+                    title=title,
+                    content=content,
+                    image=image,
+                    category=category_sports,
+                    date_scraped=timezone.now()
+                )
+                print(f'Новость "{title}" успешно сохранена.')
+            else:
+                print(f'Новость "{title}" уже существует.')
+
+
+    def scrape_168am_sports(self):
+        print("Скрапинг новостей для категории 'ՍՊՈՐՏ'")
+
+        list_news_urls = []
+
+        headers = {
+            'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.103 Safari/537.36'
+        }
+
+        url = 'https://168.am/section/sports-am'
+
+        response = requests.get(url, headers=headers)
+        soup = BeautifulSoup(response.text, 'lxml')
+
+        # Найти все ссылки на новости
+        data = soup.find_all('div', class_='realated-item clearfix')
+        for i in data:
+            news_url = i.find('a').get('href')
+            list_news_urls.append(news_url)
+
+        # Категория для новостей
+        category_sports = Category.objects.get_or_create(name='ՍՊՈՐՏ')[0]
+
+        # Парсим каждую новость и сохраняем в базу данных
+        for news_url in list_news_urls:
+            sleep(1)
+            response = requests.get(news_url, headers=headers)
+            soup = BeautifulSoup(response.text, 'lxml')
+
+            data = soup.find('div', class_='single-content')
+
+            # Извлечение данных с проверками
+            title_tag = data.find('h1', class_='single-title')
+            title = title_tag.text if title_tag else 'Заголовок не найден'
+
+            content_tag = data.find('div', class_='single-content-wrapper')
+            content = content_tag.text if content_tag else 'Контент не найден'
+
+            image_tag = data.find('img', class_='attachment-full size-full wp-post-image')
+            image = image_tag.get('src') if image_tag else 'Изображение не найдено'
+
+            # Проверка на дубликаты по заголовку
+            if not News.objects.filter(title=title).exists():
+                # Сохранение новости в базу данных
+                News.objects.create(
+                    title=title,
+                    content=content,
+                    image=image,
+                    category=category_sports,
+                    date_scraped=timezone.now()
+                )
+                print(f'Новость "{title}" успешно сохранена.')
+            else:
+                print(f'Новость "{title}" уже существует.')
+
+    def scrape_aravot_news_education(self):
+        print("Скрапинг новостей для категории 'ՀԱՅԱՍՏԱՆ'")
+
+        list_news_urls = []
+
+        headers = {
+            'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.103 Safari/537.36'
+        }
+
+        url = 'https://www.aravot.am/category/news/education/'
+
+        response = requests.get(url, headers=headers)
+        soup = BeautifulSoup(response.text, 'lxml')
+
+        # Найти все ссылки на новости
+        data = soup.find_all('div', class_='col-3')
+        for i in data:
+            news_url = i.find('a').get('href')
+            list_news_urls.append(news_url)
+
+        # Категория для новостей
+        category_politics = Category.objects.get_or_create(name='ՀԱՅԱՍՏԱՆ')[0]
+
+        # Парсим каждую новость и сохраняем в базу данных
+        for news_url in list_news_urls:
+            sleep(1)
+            response = requests.get(news_url, headers=headers)
+            soup = BeautifulSoup(response.text, 'lxml')
+
+            data = soup.find('div', class_='col-lg-6 mb-5 single-wraper')
+
+            # Извлечение данных
+            title = data.find('h1', class_='display-7').text
+            content = data.find('div', class_='post_content').text
+            image = data.find('img', class_='rounded w-100 wp-post-image').get('src')
+
+            # Проверка на дубликаты по заголовку
+            if not News.objects.filter(title=title).exists():
+                # Сохранение новости в базу данных
+                News.objects.create(
+                    title=title,
+                    content=content,
+                    image=image,
+                    category=category_politics,
+                    date_scraped=timezone.now()
+                )
+                print(f'Новость "{title}" успешно сохранена.')
+            else:
+                print(f'Новость "{title}" уже существует.')
+
+    def scrape_aravot_news_society(self):
+        print("Скрапинг новостей для категории 'ԱՎԵԼԻՆ'")
+
+        list_news_urls = []
+
+        headers = {
+            'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.103 Safari/537.36'
+        }
+
+        url = 'https://www.aravot.am/category/news/society/'
+
+        response = requests.get(url, headers=headers)
+        soup = BeautifulSoup(response.text, 'lxml')
+
+        # Найти все ссылки на новости
+        data = soup.find_all('div', class_='col-3')
+        for i in data:
+            news_url = i.find('a').get('href')
+            list_news_urls.append(news_url)
+
+        # Категория для новостей
+        category_politics = Category.objects.get_or_create(name='ԱՎԵԼԻՆ')[0]
+
+        # Парсим каждую новость и сохраняем в базу данных
+        for news_url in list_news_urls:
+            sleep(1)
+            response = requests.get(news_url, headers=headers)
+            soup = BeautifulSoup(response.text, 'lxml')
+
+            data = soup.find('div', class_='col-lg-6 mb-5 single-wraper')
+
+            # Извлечение данных
+            title = data.find('h1', class_='display-7').text
+            content = data.find('div', class_='post_content').text
+            image = data.find('img', class_='rounded w-100 wp-post-image').get('src')
+
+            # Проверка на дубликаты по заголовку
+            if not News.objects.filter(title=title).exists():
+                # Сохранение новости в базу данных
+                News.objects.create(
+                    title=title,
+                    content=content,
+                    image=image,
+                    category=category_politics,
+                    date_scraped=timezone.now()
+                )
+                print(f'Новость "{title}" успешно сохранена.')
+            else:
+                print(f'Новость "{title}" уже существует.')
+
+    def scrape_aravot_news_politics(self):
+        print("Скрапинг новостей для категории 'ՀԱՅԱՍՏԱՆ'")
+
+        list_news_urls = []
+
+        headers = {
+            'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.103 Safari/537.36'
+        }
+
+        url = 'https://www.aravot.am/category/news/politics/'
+
+        response = requests.get(url, headers=headers)
+        soup = BeautifulSoup(response.text, 'lxml')
+
+        # Найти все ссылки на новости
+        data = soup.find_all('div', class_='col-3')
+        for i in data:
+            news_url = i.find('a').get('href')
+            list_news_urls.append(news_url)
+
+        # Категория для новостей
+        category_politics = Category.objects.get_or_create(name='ՀԱՅԱՍՏԱՆ')[0]
+
+        # Парсим каждую новость и сохраняем в базу данных
+        for news_url in list_news_urls:
+            sleep(1)
+            response = requests.get(news_url, headers=headers)
+            soup = BeautifulSoup(response.text, 'lxml')
+
+            data = soup.find('div', class_='col-lg-6 mb-5 single-wraper')
+
+            # Извлечение данных
+            title = data.find('h1', class_='display-7').text
+            content = data.find('div', class_='post_content').text
+            image = data.find('img', class_='rounded w-100 wp-post-image').get('src')
+
+            # Проверка на дубликаты по заголовку
+            if not News.objects.filter(title=title).exists():
+                # Сохранение новости в базу данных
+                News.objects.create(
+                    title=title,
+                    content=content,
+                    image=image,
+                    category=category_politics,
+                    date_scraped=timezone.now()
+                )
+                print(f'Новость "{title}" успешно сохранена.')
+            else:
+                print(f'Новость "{title}" уже существует.')
+
+
+    def scrape_aravot_news_rights(self):
+        print("Скрапинг новостей для категории 'ՀԱՅԱՍՏԱՆ'")
+
+        list_news_urls = []
+
+        headers = {
+            'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.103 Safari/537.36'
+        }
+
+        url = 'https://www.aravot.am/category/news/rights/'
+
+        response = requests.get(url, headers=headers)
+        soup = BeautifulSoup(response.text, 'lxml')
+
+        # Найти все ссылки на новости
+        data = soup.find_all('div', class_='col-3')
+        for i in data:
+            news_url = i.find('a').get('href')
+            list_news_urls.append(news_url)
+
+        # Категория для новостей
+        category_politics = Category.objects.get_or_create(name='ՀԱՅԱՍՏԱՆ')[0]
+
+        # Парсим каждую новость и сохраняем в базу данных
+        for news_url in list_news_urls:
+            sleep(1)
+            response = requests.get(news_url, headers=headers)
+            soup = BeautifulSoup(response.text, 'lxml')
+
+            data = soup.find('div', class_='col-lg-6 mb-5 single-wraper')
+
+            # Извлечение данных
+            title = data.find('h1', class_='display-7').text
+            content = data.find('div', class_='post_content').text
+            image = data.find('img', class_='rounded w-100 wp-post-image').get('src')
+
+            # Проверка на дубликаты по заголовку
+            if not News.objects.filter(title=title).exists():
+                # Сохранение новости в базу данных
+                News.objects.create(
+                    title=title,
+                    content=content,
+                    image=image,
+                    category=category_politics,
+                    date_scraped=timezone.now()
+                )
+                print(f'Новость "{title}" успешно сохранена.')
+            else:
+                print(f'Новость "{title}" уже существует.')
+
 
     # Скрапинг для категории "Мир"
     def scrape_world_news(self):
@@ -35,6 +413,26 @@ class Command(BaseCommand):
 
         category_world = Category.objects.get_or_create(name='ԱՇԽԱՐՀ')[0]  # Категория "Мир"
         self.scrape_and_save_news(list_news_urls, category_world)
+
+    def scrape_more_news(self):
+        print("Скрапинг новостей для категории 'ԱՎԵԼԻՆ'")
+        list_news_urls = []
+        headers = {
+            'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.103 Safari/537.36'}
+
+        for count in range(1, 3):  # Например, собираем 2 страницы
+            sleep(1)
+            url = f'https://shamshyan.com/hy/category/gagik-shamshyan?page={count}'
+            response = requests.get(url, headers=headers)
+            soup = BeautifulSoup(response.text, 'lxml')
+            data = soup.find_all('div', class_='category-card bg-gray-100 rounded-lg')
+
+            for i in data:
+                news_url = i.find('a').get('href')
+                list_news_urls.append(news_url)
+
+        category_more = Category.objects.get_or_create(name='ԱՎԵԼԻՆ')[0]  # Категория "ԱՎԵԼԻՆ"
+        self.scrape_and_save_news(list_news_urls, category_more)
 
     # Скрапинг для категории "Спорт"
     def scrape_sport_news(self):
@@ -118,3 +516,6 @@ class Command(BaseCommand):
                 print(f'Новость "{title}" успешно сохранена.')
             else:
                 print(f'Новость "{title}" уже существует в базе данных.')
+
+
+

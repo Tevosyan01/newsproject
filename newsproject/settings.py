@@ -106,6 +106,21 @@ AUTH_PASSWORD_VALIDATORS = [
 
 # Internationalization
 # https://docs.djangoproject.com/en/4.2/topics/i18n/
+from django.utils.translation import gettext_lazy as _
+
+LANGUAGES = [
+    ('hy', _('Armenian')),
+    ('ru', _('Russian')),
+    ('en', _('English')),
+]
+
+USE_I18N = True  # Включаем международный перевод
+
+USE_L10N = True
+
+LOCALE_PATHS = [
+    BASE_DIR / 'locale/',  # Путь для языковых файлов
+]
 
 LANGUAGE_CODE = 'en-us'
 

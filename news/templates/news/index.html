@@ -1,39 +1,74 @@
 {% extends 'base.html' %}
 
+{% block weather_rates %}
+	<div class="weather-currency-widget">
+    <div class="weather-widget">
+        <img src="{{ weather_info.icon_url }}" alt="Weather Icon">
+        <p>{{ weather_info.city }}: {{ weather_info.temperature }}°C</p>
+    </div>
+<div class="currency-widget">
+    <h4>Փոխարժեքներ</h4>
+    <div class="currency-rates">
+        <p>USD/AMD: {{ rates.usd_amd|floatformat:2 }}</p>
+        <p>EUR/AMD: {{ rates.eur_amd|floatformat:2 }}</p>
+        <p>RUR/AMD: {{ rates.rub_amd|floatformat:2 }}</p>
+    </div>
+</div>
+</div>
+{% endblock %}
+
+{% block categori_title %}
+	<div class="category-title">
+    <h3>ԲՈԼՈՐ ՆՈՐՈՒԹՅՈՒՆՆԵՐԸ</h3>
+    </div>
+{% endblock %}
+
 {% block content %}
 <main>
     <section class="news-grid">
         {% for n in page_obj %}
             <article class="news-card">
-                <a href="{% url 'news_detail' news_id=n.id %}"><img src="{{ n.image }}" alt="{{ n.title }}"></a>
+                <!-- Используем переменную n вместо news -->
+                <a href="{% url 'news_detail' news_id=n.id language=selected_language %}">
+                    <img src="{{ n.image }}" alt="{{ n.title }}">
+                </a>
                 <h2>{{ n.title }}</h2>
                 <p>{{ n.content|truncatewords:20 }}</p>
-                <a href="{% url 'news_detail' news_id=n.id %}" class="read-more">կարդալ ավելին</a>
+                <a href="{% url 'news_detail' news_id=n.id language=selected_language %}" class="read-more">կարդալ ավելին</a>
             </article>
         {% endfor %}
     </section>
 
     <!-- Пагинация с номерами страниц -->
     <div class="pagination">
-        <span class="step-links">
-            {% if page_obj.has_previous %}
-                <a href="?page=1">&laquo; առաջին</a>
-                <a href="?page={{ page_obj.previous_page_number }}">հետ</a>
-            {% endif %}
+    <span class="step-links">
+        {% if page_obj.has_previous %}
+            <a href="?page=1&language={{ selected_language }}">&laquo; Առաջինը</a>
+            <a href="?page={{ page_obj.previous_page_number }}&language={{ selected_language }}">հետ</a>
+        {% endif %}
 
-            {% for num in page_obj.paginator.page_range %}
+        {% for num in page_obj.paginator.page_range %}
+            {% if num == 1 or num == 2 or num == 3 or num == page_obj.paginator.num_pages %}
                 {% if page_obj.number == num %}
                     <span class="current">{{ num }}</span>
                 {% else %}
-                    <a href="?page={{ num }}">{{ num }}</a>
+                    <a href="?page={{ num }}&language={{ selected_language }}">{{ num }}</a>
                 {% endif %}
-            {% endfor %}
-
-            {% if page_obj.has_next %}
-                <a href="?page={{ page_obj.next_page_number }}">առաջ</a>
-                <a href="?page={{ page_obj.paginator.num_pages }}">վերջին &raquo;</a>
+            {% elif num == page_obj.number %}
+                <span class="current">{{ num }}</span>
+            {% elif num == page_obj.number|add:"-1" or num == page_obj.number|add:"1" %}
+                <a href="?page={{ num }}&language={{ selected_language }}">{{ num }}</a>
+            {% elif num == 4 or num == page_obj.paginator.num_pages|add:"-1" %}
+                <span>...</span>
             {% endif %}
-        </span>
-    </div>
+        {% endfor %}
+
+        {% if page_obj.has_next %}
+            <a href="?page={{ page_obj.next_page_number }}&language={{ selected_language }}">առաջ</a>
+            <a href="?page={{ page_obj.paginator.num_pages }}&language={{ selected_language }}">Վերջինը &raquo;</a>
+        {% endif %}
+    </span>
+</div>
+
 </main>
 {% endblock %}

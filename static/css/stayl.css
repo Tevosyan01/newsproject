@@ -42,11 +42,7 @@ header {
     width: 100%;
 }
 
-.logo {
-    font-size: 1.8rem;
-    font-weight: bold;
-    color: #ffa500;
-}
+
 
 .nav-links {
     list-style: none;
@@ -207,16 +203,7 @@ footer {
     }
 }
 
-.logo {
-    font-size: 1.8rem;
-    font-weight: bold;
-    color: #ffa500;
-    text-decoration: none; /* Убираем подчеркивание */
-}
 
-.logo:hover {
-    color: #ff4500; /* Цвет при наведении */
-}
 
 /* Стили для блока с количеством просмотров */
 .views-count {
@@ -368,12 +355,7 @@ header {
     color: #fff;
 }
 
-.logo {
-    font-size: 1.8rem;
-    font-weight: bold;
-    color: #ffa500;
-    text-decoration: none;
-}
+
 
 /* Центровка основного меню */
 .navbar {
@@ -429,12 +411,7 @@ header {
     color: #fff;
 }
 
-.logo {
-    font-size: 2.2rem; /* Увеличиваем размер логотипа */
-    font-weight: bold;
-    color: #ffa500;
-    text-decoration: none;
-}
+
 
 /* Центровка основного меню */
 .navbar {
@@ -480,101 +457,7 @@ header {
     color: #ff4500; /* Изменение цвета при наведении */
 }
 
-/* Пагинация */
-.pagination {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-top: 20px;
-}
 
-.pagination .step-links {
-    display: flex;
-    gap: 10px;
-}
-
-.pagination .step-links a, .pagination .step-links .current {
-    padding: 10px 15px;
-    border: 1px solid #333;
-    border-radius: 5px;
-    text-decoration: none;
-    color: #333;
-    transition: background-color 0.3s, color 0.3s;
-}
-
-.pagination .step-links a:hover {
-    background-color: #333;
-    color: #fff;
-}
-
-.pagination .step-links .current {
-    background-color: #ffa500;
-    color: white;
-    border: 1px solid #ffa500;
-}
-
-.pagination .step-links a:disabled {
-    opacity: 0.6;
-    pointer-events: none;
-}
-
-/* Пагинация */
-.pagination {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-top: 20px;
-}
-
-.pagination .step-links {
-    display: flex;
-    gap: 10px;
-}
-
-.pagination .step-links a, .pagination .step-links .current {
-    padding: 10px 15px;
-    border: 1px solid #333;
-    border-radius: 5px;
-    text-decoration: none;
-    color: #333;
-    transition: background-color 0.3s, color 0.3s;
-}
-
-.pagination .step-links a:hover {
-    background-color: #333;
-    color: #fff;
-}
-
-.pagination .step-links .current {
-    background-color: #ffa500;
-    color: white;
-    border: 1px solid #ffa500;
-    font-weight: bold;
-}
-
-.pagination .step-links a:disabled {
-    opacity: 0.6;
-    pointer-events: none;
-}
-
-/* Пагинация */
-.pagination {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-top: 20px;
-    gap: 5px; /* Расстояние между элементами пагинации */
-}
-
-.pagination .step-links {
-    display: flex;
-    gap: 5px; /* Расстояние между кнопками */
-}
-
-.pagination .step-links a, .pagination .step-links .current {
-    padding: 10px 15px;
-    border: 1px solid #333;
-    border-radius: 5px;}
 
 /* Сетка для новостей */
 .news-grid {
@@ -689,3 +572,369 @@ header {
 .read-more:hover {
     color: #ffa500;
 }
+
+
+.pagination {
+    text-align: center;
+    padding: 10px 0;
+}
+
+.pagination .step-links a {
+    margin: 0 5px;
+    padding: 8px 12px;
+    background-color: #f0f0f0;
+    border-radius: 5px;
+    color: #333;
+    text-decoration: none;
+    font-size: 14px;
+    transition: background-color 0.3s ease;
+}
+
+.pagination .step-links .current {
+    margin: 0 5px;
+    padding: 8px 12px;
+    background-color: #ffa500;
+    color: white;
+    border-radius: 5px;
+    font-weight: bold;
+}
+
+.pagination .step-links a:hover {
+    background-color: #ffa500;
+    color: white;
+}
+
+.pagination .first-page, .pagination .last-page, .pagination .prev-page, .pagination .next-page {
+    font-weight: bold;
+}
+
+.pagination .first-page:hover, .pagination .last-page:hover {
+    background-color: #4CAF50;
+    color: white;
+}
+.nav-links li img {
+    display: inline-block;
+    margin-left: 10px;
+    width: 30px;
+    height: auto;
+    cursor: pointer;
+}
+
+/* Основное оформление для страницы детальной новости */
+.news-detail {
+    margin: 40px auto;
+    max-width: 800px;
+    text-align: left;
+}
+
+.news-detail h1 {
+    font-size: 1.8rem;
+    font-weight: bold;
+    text-align: left;
+    margin-bottom: 20px;
+    line-height: 1.4; /* Увеличиваем межстрочный интервал для лучшего чтения */
+}
+
+.news-detail p {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    text-align: left;
+    margin-bottom: 20px;
+}
+
+.news-detail img {
+    display: block;
+    margin: 20px 0; /* Добавляем отступы до и после изображения */
+    max-width: 100%;
+    height: auto;
+}
+
+.views-count {
+    font-size: 1.2rem;
+    color: #666;
+    display: flex;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.views-icon {
+    margin-right: 8px;
+    font-size: 1.5rem;
+}
+
+/* Оформление блоков с новостями по категориям */
+.related-news {
+    margin-top: 50px;
+    padding-top: 30px;
+    border-top: 1px solid #ddd;
+}
+
+.related-news h2 {
+    font-size: 2rem;
+    margin-bottom: 30px;
+    text-align: center;
+    font-weight: bold;
+}
+
+.category-row {
+    margin-bottom: 40px;
+}
+
+.category-row h3 {
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+    font-weight: bold;
+    color: #333;
+    text-transform: uppercase;
+    border-left: 5px solid #ffa500;
+    padding-left: 10px;
+}
+
+.news-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    grid-gap: 20px;
+}
+
+.news-item {
+    border-radius: 10px;
+    overflow: hidden;
+    background: #f9f9f9;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.news-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+.news-item img {
+    width: 100%;
+    height: 100px;
+    object-fit: cover;
+}
+
+.news-item p {
+    padding: 10px;
+    font-size: 1rem;
+    font-weight: bold;
+    color: #333;
+}
+
+.news-item a {
+    color: inherit;
+    text-decoration: none;
+}
+
+.news-item a:hover p {
+    color: #ffa500;
+}
+.category-row {
+    margin-bottom: 40px;
+}
+
+.category-row h3 {
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+}
+
+.news-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px; /* Отступы между карточками */
+}
+
+.news-item {
+    flex: 1 1 calc(16.66% - 20px); /* 6 новостей в ряд */
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    overflow: hidden;
+    text-align: center;
+}
+
+.news-item img {
+    width: 100%;
+    height: 150px; /* Фиксируем высоту изображений */
+    object-fit: cover;
+}
+
+.news-item p {
+    font-size: 0.7rem;
+    margin: 10px;
+    text-align: left;
+    display: -webkit-box;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: normal;
+    height: 160px; /* Фиксируем высоту для двух строк текста */
+}
+
+/* Стиль для логотипа */
+.logo {
+    font-family: cursive;
+    font-size: 36px;
+    font-weight: bold;
+    color: #ffb220; /* Цвет логотипа */
+    text-transform: uppercase; /* Преобразуем текст в верхний регистр */
+    letter-spacing: 2px;
+    /*text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); !* Тень для текста *!*/
+    position: relative;
+    display: inline-block;
+    background: linear-gradient(45deg, #ffa500, #e74c3c); /* Градиентный текст */
+    -webkit-background-clip: text;
+    color: transparent;
+    animation: logoAnimation 2s ease-out; /* Анимация появления */
+    text-decoration: none; /* Подчеркивание текста */
+}
+
+/* Эффект при наведении */
+.logo:hover {
+    text-shadow: 2px 2px 4px rgba(238, 224, 224, 0.2); /* Белая тень */
+    text-decoration: none; /* Подчеркивание текста */
+}
+
+/* Анимация появления логотипа */
+@keyframes logoAnimation {
+    0% {
+        opacity: 0;
+        transform: scale(0.8); /* Уменьшенный размер */
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1); /* Обычный размер */
+    }
+}
+.navbar li a:hover {
+    background: linear-gradient(45deg, #ffa500, #e74c3c);
+    -webkit-background-clip: text; /* Для Webkit браузеров */
+    -webkit-text-fill-color: transparent; /* Для Webkit браузеров */
+}
+
+.navbar{
+    border-radius: 15px;
+}
+
+.read-more{
+    background: linear-gradient(45deg, #ffa500, #e74c3c);
+    -webkit-background-clip: text; /* Для Webkit браузеров */
+    -webkit-text-fill-color: transparent; /* Для Webkit браузеров */
+}
+
+.read-more:hover{
+    background: linear-gradient(45deg, #f84030, #ffa100);
+    -webkit-background-clip: text; /* Для Webkit браузеров */
+    -webkit-text-fill-color: transparent; /* Для Webkit браузеров */
+}
+
+.step-links a button {
+    background: linear-gradient(45deg, #ffa500, #e74c3c);
+    -webkit-background-clip: text; /* Для Webkit браузеров */
+    -webkit-text-fill-color: transparent; /* Для Webkit браузеров */
+}
+/* Общий стиль для виджета погоды и валют */
+.weather-currency-widget {
+    text-align: center;
+    padding: 20px;
+    background: linear-gradient(45deg, #ffa500, #e74c3c);
+    border-radius: 15px;
+    width: 70%;
+    margin: 20px auto;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    color: #fff;
+}
+
+/* Стиль для виджета погоды */
+.weather-widget {
+    margin-bottom: 20px;
+    position: relative;
+}
+
+/* Стиль иконки погоды */
+.weather-widget img.weather-icon {
+    width: 60px; /* Регулируйте размер иконки, чтобы он был подходящим */
+    height: 60px;
+    display: block;
+    margin: 0 auto 10px auto; /* Центрирование иконки и добавление отступа снизу */
+}
+
+/* Стиль для текста описания погоды */
+.weather-widget p {
+    font-family: Arial, sans-serif;
+    font-size: 1.4rem;
+    color: #fff;
+}
+
+/* Разделитель между погодой и курсами валют */
+.divider {
+    margin: 20px 0;
+    height: 2px;
+    background-color: rgba(255, 255, 255, 0.6);
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Стиль для виджета валют */
+.currency-widget {
+    background: #333;
+    border-radius: 15px;
+    padding: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    color: #333;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.currency-widget:hover {
+    transform: scale(1);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+}
+
+.currency-widget h4 {
+    font-family: 'Arial Black', sans-serif;
+    margin-bottom: 10px;
+    font-size: 1.6rem;
+    background: linear-gradient(45deg, #ffa500, #e74c3c);
+    -webkit-background-clip: text; /* Обрезаем фон в пределах текста */
+    -webkit-text-fill-color: transparent; /* Делаем текст прозрачным, чтобы был виден только фон */
+}
+
+
+.currency-rates {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+}
+
+.currency-rates p {
+    font-family: Arial, sans-serif;
+    font-size: 1.2rem;
+    color: #333;
+    margin: 0;
+}
+
+.category-title {
+        display: inline-block;
+        text-align: center;
+        margin: 20px 280px;
+        padding: 10px;
+        background: linear-gradient(90deg, #333, #212121);
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .category-title h3 {
+        font-family: 'Arial Black', sans-serif;
+        color: white;
+        font-size: 2rem;
+        background: linear-gradient(45deg, #ffa500, #e74c3c);
+    -webkit-background-clip: text; /* Обрезаем фон в пределах текста */
+    -webkit-text-fill-color: transparent; /* Делаем текст прозрачным, чтобы был виден только фон */
+    }
+
+    .currency-rates p {
+         background: linear-gradient(45deg, #e74c3c, #ffa500);
+    -webkit-background-clip: text; /* Обрезаем фон в пределах текста */
+    -webkit-text-fill-color: transparent;
+    }

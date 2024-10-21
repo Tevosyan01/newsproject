@@ -10,10 +10,76 @@
 
         <!-- Обёрнем количество просмотров в блок с классом для стилей -->
         <div class="views-count">
-            <span class="views-icon">👁️</span> Просмотров: {{ news_item.views }}
+            <span class="views-icon">👁️</span> Դիտումներ: {{ news_item.views }}
         </div>
     </article>
+
+    <!-- Ряды с новостями по категориям -->
+    <section class="related-news">
+    <br>
+    <br>
+        <h2>Վերջին նորությունները</h2>
+
+        <!-- Ряд для категории 'ԱՇԽԱՐՀ' -->
+        <div class="category-row">
+            <h3>ԱՇԽԱՐՀ</h3>
+            <div class="news-list">
+                {% for news in world_news %}
+                    <div class="news-item">
+                        <a href="{% url 'news_detail' news_id=news.id language=selected_language %}">
+                            <img src="{{ news.image }}" alt="{{ news.title }}">
+                            <p>{{ news.title|truncatewords:10 }}</p>
+                        </a>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+
+        <!-- Ряд для категории 'ՀԱՅԱՍՏԱՆ' -->
+        <div class="category-row">
+            <h3>ՀԱՅԱՍՏԱՆ</h3>
+            <div class="news-list">
+                {% for news in armenia_news %}
+                    <div class="news-item">
+                        <a href="{% url 'news_detail' news_id=news.id language=selected_language %}">
+                            <img src="{{ news.image }}" alt="{{ news.title }}">
+                            <p>{{ news.title|truncatewords:10 }}</p>
+                        </a>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+
+        <!-- Ряд для категории 'ՍՊՈՐՏ' -->
+        <div class="category-row">
+            <h3>ՍՊՈՐՏ</h3>
+            <div class="news-list">
+                {% for news in sports_news %}
+                    <div class="news-item">
+                        <a href="{% url 'news_detail' news_id=news.id language=selected_language %}">
+                            <img src="{{ news.image }}" alt="{{ news.title }}">
+                            <p>{{ news.title|truncatewords:10 }}</p>
+                        </a>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+
+        <!-- Ряд для категории 'ՄԱՍՆԱՎՈՐ' -->
+        <div class="category-row">
+            <h3>ԱՎԵԼԻՆ</h3>
+            <div class="news-list">
+                {% for news in more_news %}
+                    <div class="news-item">
+                        <a href="{% url 'news_detail' news_id=news.id language=selected_language %}">
+                            <img src="{{ news.image }}" alt="{{ news.title }}">
+                            <p>{{ news.title|truncatewords:10 }}</p>
+                        </a>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+
+    </section>
 </main>
 {% endblock %}
-
-

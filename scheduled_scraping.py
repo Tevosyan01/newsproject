@@ -15,13 +15,16 @@ scheduler = BlockingScheduler()
 # Функция для скрапинга новостей
 def scrape_news():
     print(f"[{datetime.now()}] Запуск скрапинга новостей.")
+    call_command('scrape_news_ru')  # Вызов команды Django для скра��инга новостей на русском языке
+    call_command('scrape_news_en')
     call_command('scrape_news')  # Вызов команды Django для скрапинга новостей
+
 
 # Настраиваем временную зону
 timezone = pytz.timezone('Europe/Moscow')
 
-# Добавляем задачу: запуск каждые 15 минут
-scheduler.add_job(scrape_news, 'interval', minutes=15, timezone=timezone)
+# Добавляем задачу: запуск каждые 5 минут
+scheduler.add_job(scrape_news, 'interval', minutes=1, timezone=timezone)
 
 # Сообщение о старте планировщика
 print("Планировщик запущен. Ждём выполнения задач...")
