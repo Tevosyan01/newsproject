@@ -16,23 +16,23 @@ body {
     flex-direction: column;
 }
 
-/* Шапка сайта */
-header {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 60px; /* Высота шапки */
-    background-color: #333;
-    color: #fff;
-    z-index: 1000;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0 20px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    transition: top 0.3s ease; /* Плавное скрытие шапки */
-}
+/*!* Шапка сайта *!*/
+/*header {*/
+/*    position: fixed;*/
+/*    top: 0;*/
+/*    left: 0;*/
+/*    width: 100%;*/
+/*    height: 60px; !* Высота шапки *!*/
+/*    background-color: #333;*/
+/*    color: #fff;*/
+/*    z-index: 1000;*/
+/*    display: flex;*/
+/*    justify-content: space-between;*/
+/*    align-items: center;*/
+/*    padding: 0 20px;*/
+/*    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);*/
+/*    transition: top 0.3s ease; !* Плавное скрытие шапки *!*/
+/*}*/
 
 /* Логотип и навигация */
 .navbar {
@@ -171,38 +171,6 @@ footer {
     left: 0;
 }
 
-/* Адаптивность */
-@media (max-width: 768px) {
-    .nav-links {
-        display: none;
-        flex-direction: column;
-        position: absolute;
-        top: 60px;
-        left: 0;
-        width: 100%;
-        background-color: #333;
-        padding: 20px;
-    }
-
-    .nav-links.active {
-        display: flex;
-    }
-
-    .burger {
-        display: flex;
-    }
-
-    .news-grid {
-        grid-template-columns: repeat(2, 1fr); /* 2 новости в ряд на планшетах */
-    }
-}
-
-@media (max-width: 480px) {
-    .news-grid {
-        grid-template-columns: 1fr; /* 1 новость в ряд на мобильных устройствах */
-    }
-}
-
 
 
 /* Стили для блока с количеством просмотров */
@@ -227,11 +195,12 @@ footer {
 
 .contact-section {
     padding: 50px 20px;
-    background-color: #f5f5f5;
+    background: linear-gradient(45deg, #ffa500, #e74c3c);
     display: flex;
     justify-content: center;
     align-items: center;
     min-height: 100vh;
+    border-radius: 10px;
 }
 
 .contact-container {
@@ -314,7 +283,7 @@ footer {
     display: inline-block;
     padding: 12px 30px;
     font-size: 1.2rem;
-    background-color: #007bff;
+    background: linear-gradient(45deg, #ffa500, #e74c3c);
     color: #fff;
     border: none;
     border-radius: 5px;
@@ -323,7 +292,8 @@ footer {
 }
 
 .btn-primary:hover {
-    background-color: #0056b3;
+    background: linear-gradient(45deg, #e74c3c, #ffa500);
+    color: #333333;
 }
 
 .contact-container h2,
@@ -466,7 +436,6 @@ header {
     gap: 20px; /* Расстояние между новостями */
     margin-top: 20px;
 }
-
 /* Карточка новости */
 .news-card {
     background-color: #fff;
@@ -938,3 +907,67 @@ header {
     -webkit-background-clip: text; /* Обрезаем фон в пределах текста */
     -webkit-text-fill-color: transparent;
     }
+
+    /* Основные стили для секции Telegram новостей */
+
+.footer {
+    background: linear-gradient(to right, #e74c3c, #ffa500);
+    color: white;
+    padding: 20px 0;
+    text-align: center;
+    font-size: 14px;
+}
+
+.footer p {
+    margin: 0;
+    padding: 5px;
+    font-weight: bold;
+}
+
+header{
+    weight: 100%;
+}
+
+
+/* Блок социальных иконок */
+.social-share {
+    margin-top: 20px;
+    text-align: center;
+
+}
+
+.social-share p {
+    font-size: 16px;
+    margin-bottom: 10px;
+}
+
+.social-icons {
+    display: flex;
+    justify-content: left;
+    gap: 20px; /* Увеличиваем расстояние между иконками */
+}
+
+/* Стиль для иконок */
+.social-icons a {
+    font-size: 28px; /* Увеличиваем размер иконок */
+    color: #555; /* Стандартный цвет */
+    transition: color 0.3s, transform 0.3s; /* Плавный переход для цвета и размера */
+}
+
+.social-icons a:hover {
+    color: #f13b04; /* Цвет при наведении */
+    transform: scale(1.2); /* Увеличиваем иконку при наведении */
+}
+
+.news-link {
+    color: #007bff; /* Синий цвет ссылки */
+    text-decoration: none; /* Убираем стандартное подчеркивание */
+    font-weight: bold; /* Жирный текст */
+    transition: color 0.3s ease; /* Плавный переход цвета при наведении */
+}
+
+.news-link:hover {
+    color: #0056b3; /* Изменяем цвет при наведении */
+    text-decoration: underline; /* Добавляем подчеркивание при наведении */
+}
+

@@ -1,13 +1,15 @@
+from bs4 import BeautifulSoup
 from django.shortcuts import render, get_object_or_404, redirect
 from django.core.paginator import Paginator
 from django.contrib import messages
-from .models import News, Category
+from .models import News, Category, TelegramNews
 from .forms import ContactForm
 
 # Главная страница с фильтрацией по языку
 def home(request, language='hy'):
     # Фильтруем новости по выбранному языку
-    news_items = News.objects.filter(language=language).order_by('-date_published')
+    news_items = News.objects.filter(language=language).order_by('-date_published')  # Отбираем последние 12 новостей
+    telegram_news = TelegramNews.objects.all().order_by('-date_published')[:15]  # Добавляем Telegram новости
 
     paginator = Paginator(news_items, 12)
     page_number = request.GET.get('page')
@@ -23,8 +25,10 @@ def home(request, language='hy'):
         'selected_language': language,  # Передаем выбранный язык в контекст
         'weather_info': weather_info,
         'rates': rates,  # Передаем курсы валют в контекст'
+        'telegram_news': telegram_news,  # Добавляем Telegram новости в контексте'''
     }
     return render(request, 'news/index.html', context)
+
 
 
 # Новости по категориям с фильтрацией по языку
@@ -105,7 +109,7 @@ def get_weather():
         data = response.json()
 
         # Получаем температуру, описание погоды и код иконки
-        temperature = data['main']['temp']
+        temperature = int(data['main']['temp'])
         description = data['weather'][0]['description']
         icon_code = data['weather'][0]['icon']
 
@@ -126,33 +130,49 @@ weather_info = get_weather()
 
 
 def get_currency_rates():
-    # Ваш API ключ
-    api_key = '24d19ce1c4fa0e854fef8aed'
+    # URL для получения курсов валют
+    url = 'https://www.rate.am/hy/armenian-dram-exchange-rates/banks'
 
-    # URL для получения курсов валют для USD, EUR и RUB
-    url_usd = f'https://v6.exchangerate-api.com/v6/{api_key}/latest/USD'
-    url_eur = f'https://v6.exchangerate-api.com/v6/{api_key}/latest/EUR'
-    url_rub = f'https://v6.exchangerate-api.com/v6/{api_key}/latest/RUB'
+    # Заголовок для маскировки под браузер
+    headers = {
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko)'
+    }
 
     # Инициализация значений по умолчанию
     usd_amd, eur_amd, rub_amd = None, None, None
 
-    # Получение курсов валют
     try:
-        response_usd = requests.get(url_usd)
-        if response_usd.status_code == 200:
-            data_usd = response_usd.json()
-            usd_amd = data_usd['conversion_rates']['AMD']
+        # Получение данных с сайта
+        response = requests.get(url, headers=headers)
+        response.raise_for_status()  # Проверяем наличие ошибок
 
-        response_eur = requests.get(url_eur)
-        if response_eur.status_code == 200:
-            data_eur = response_eur.json()
-            eur_amd = data_eur['conversion_rates']['AMD']
+        # Парсим HTML-код
+        soup = BeautifulSoup(response.text, 'lxml')
 
-        response_rub = requests.get(url_rub)
-        if response_rub.status_code == 200:
-            data_rub = response_rub.json()
-            rub_amd = data_rub['conversion_rates']['AMD']
+        # Находим все блоки с информацией о валюте
+        data = soup.find_all('div', class_='group flex items-center h-10 bg-N30')
+
+        # Проверяем, что получили хотя бы один блок с информацией
+        if len(data) > 0:
+            # Извлекаем данные по валютам USD, EUR и RUB
+            for block in data:
+                currency_blocks = block.find_all('div',
+                                                 class_='flex items-center justify-center min-w-[9rem] w-[33.333%]')
+
+                # USD Block
+                usd_sell = currency_blocks[0].find_all('div', class_='w-1/2')[1].text.strip()
+                usd_amd = usd_sell
+
+                # EUR Block
+                eur_sell = currency_blocks[1].find_all('div', class_='w-1/2')[1].text.strip()
+                eur_amd = eur_sell
+
+                # RUB Block
+                rub_sell = currency_blocks[2].find_all('div', class_='w-1/2')[1].text.strip()
+                rub_amd = rub_sell
+
+                # Так как блок данных повторяется, выходим после первого блока
+                break
 
     except requests.exceptions.RequestException as e:
         print(f"Ошибка при получении курса валют: {e}")
@@ -163,5 +183,6 @@ def get_currency_rates():
         'eur_amd': eur_amd,
         'rub_amd': rub_amd,
     }
+
 
 rates = get_currency_rates()

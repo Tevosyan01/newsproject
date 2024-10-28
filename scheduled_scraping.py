@@ -15,6 +15,7 @@ scheduler = BlockingScheduler()
 # Функция для скрапинга новостей
 def scrape_news():
     print(f"[{datetime.now()}] Запуск скрапинга новостей.")
+    call_command('scrape_news_tg')
     call_command('scrape_news_ru')  # Вызов команды Django для скра��инга новостей на русском языке
     call_command('scrape_news_en')
     call_command('scrape_news')  # Вызов команды Django для скрапинга новостей

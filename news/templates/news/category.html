@@ -1,5 +1,11 @@
 {% extends 'base.html' %}
 
+{% block categori_title %}
+	<div class="category-title">
+    <h3>{{ category.name }}</h3>
+    </div>
+{% endblock %}
+
 {% block content %}
 <main>
     <section class="news-grid">

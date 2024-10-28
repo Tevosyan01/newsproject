@@ -1,0 +1,150 @@
+/* Стили для секции Telegram новостей */
+.telegram-news-slider-container {
+    position: relative;
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f7f7f7;
+    border-radius: 15px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.telegram-news-header {
+    font-size: 2em;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 20px;
+    color: #ef4b13;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    font-family: 'Helvetica Neue', sans-serif;
+    background: linear-gradient(90deg, #333, #212121);
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+
+
+
+.telegram-news-slider {
+    display: flex;
+    overflow: hidden;
+    align-items: center;
+    justify-content: center;
+}
+
+.telegram-news-item {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.telegram-news-item.active {
+    display: flex;
+}
+
+.telegram-news-media {
+    max-width: 100%;
+    max-height: 450px;
+    border-radius: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 15px;
+}
+
+.telegram-news-content {
+    max-width: 100%;
+    background-color: #ffffff;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    font-family: 'Arial', sans-serif;
+}
+
+.telegram-news-title {
+    font-size: 1.5em;
+    font-weight: bold;
+    margin-bottom: 10px;
+    color: #333;
+}
+
+.telegram-news-date {
+    font-size: 0.9em;
+    color: #888;
+    margin-bottom: 15px;
+}
+
+/* Стили кнопок навигации */
+.telegram-news-nav-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(0, 0, 0, 0.1);
+    border: none;
+    font-size: 2.5em;
+    cursor: pointer;
+    transition: background 0.3s ease, transform 0.3s ease;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#telegram-prev-news {
+    left: -20px;
+    color: #333333;
+    background: linear-gradient(45deg, #e74c3c, #ffa500);
+}
+
+#telegram-next-news {
+    right: -20px;
+    color: #333333;
+    background: linear-gradient(45deg, #e74c3c, #ffa500);
+}
+
+.telegram-news-nav-btn:hover {
+    background: rgba(0, 0, 0, 0.2);
+    transform: scale(1.1);
+}
+
+/* Стилизация контейнера с текстом новостей */
+.telegram-news-text-container {
+    max-height: 200px;
+    overflow-y: auto;
+    padding: 10px;
+    border-radius: 10px;
+    background-color: #fff;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* Стили для скролл-бара */
+.telegram-news-text-container::-webkit-scrollbar {
+    width: 8px;
+}
+
+.telegram-news-text-container::-webkit-scrollbar-track {
+    background: #e6e6e6;
+    border-radius: 10px;
+}
+
+.telegram-news-text-container::-webkit-scrollbar-thumb {
+    background: linear-gradient(45deg, #ffa500, #e74c3c);
+    border-radius: 10px;
+    transition: background 0.3s ease, transform 0.3s ease;
+}
+
+.telegram-news-text-container::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(45deg, #e74c3c, #ffa500);
+    transform: scale(1.1);
+}
+
+
+
+.telegram-news-text {
+    font-size: 1.1em;
+    color: #333;
+    line-height: 1.6;
+    margin: 0;
+}

@@ -25,6 +25,7 @@ class Command(BaseCommand):
 
 
     def scrape_168am_faces(self):
+        urllib = 'https://168.am/'
         print("Скрапинг новостей для категории 'ԱՇԽԱՐՀ'")
 
         list_news_urls = []
@@ -81,6 +82,7 @@ class Command(BaseCommand):
 
 
     def scrape_168am_press(self):
+        urllib = 'https://168.am/'
         print("Скрапинг новостей для категории 'ԱՎԵԼԻՆ'")
 
         list_news_urls = []
@@ -129,7 +131,8 @@ class Command(BaseCommand):
                     content=content,
                     image=image,
                     category=category_sports,
-                    date_scraped=timezone.now()
+                    date_scraped=timezone.now(),
+                    urllib=urllib
                 )
                 print(f'Новость "{title}" успешно сохранена.')
             else:
@@ -137,6 +140,7 @@ class Command(BaseCommand):
 
 
     def scrape_168am_sports(self):
+        urllib = 'https://168.am/'
         print("Скрапинг новостей для категории 'ՍՊՈՐՏ'")
 
         list_news_urls = []
@@ -185,13 +189,15 @@ class Command(BaseCommand):
                     content=content,
                     image=image,
                     category=category_sports,
-                    date_scraped=timezone.now()
+                    date_scraped=timezone.now(),
+                    urllib = urllib
                 )
                 print(f'Новость "{title}" успешно сохранена.')
             else:
                 print(f'Новость "{title}" уже существует.')
 
     def scrape_aravot_news_education(self):
+        urllib = 'https://www.aravot.am/'
         print("Скрапинг новостей для категории 'ՀԱՅԱՍՏԱՆ'")
 
         list_news_urls = []
@@ -235,13 +241,15 @@ class Command(BaseCommand):
                     content=content,
                     image=image,
                     category=category_politics,
-                    date_scraped=timezone.now()
+                    date_scraped=timezone.now(),
+                    urllib=urllib
                 )
                 print(f'Новость "{title}" успешно сохранена.')
             else:
                 print(f'Новость "{title}" уже существует.')
 
     def scrape_aravot_news_society(self):
+        urllib = 'https://www.aravot.am/'
         print("Скрапинг новостей для категории 'ԱՎԵԼԻՆ'")
 
         list_news_urls = []
@@ -285,13 +293,15 @@ class Command(BaseCommand):
                     content=content,
                     image=image,
                     category=category_politics,
-                    date_scraped=timezone.now()
+                    date_scraped=timezone.now(),
+                    urllib=urllib
                 )
                 print(f'Новость "{title}" успешно сохранена.')
             else:
                 print(f'Новость "{title}" уже существует.')
 
     def scrape_aravot_news_politics(self):
+        urllib = 'https://www.aravot.am/'
         print("Скрапинг новостей для категории 'ՀԱՅԱՍՏԱՆ'")
 
         list_news_urls = []
@@ -335,7 +345,8 @@ class Command(BaseCommand):
                     content=content,
                     image=image,
                     category=category_politics,
-                    date_scraped=timezone.now()
+                    date_scraped=timezone.now(),
+                    urllib = urllib
                 )
                 print(f'Новость "{title}" успешно сохранена.')
             else:
@@ -343,6 +354,7 @@ class Command(BaseCommand):
 
 
     def scrape_aravot_news_rights(self):
+        urllib = 'https://www.aravot.am/'
         print("Скрапинг новостей для категории 'ՀԱՅԱՍՏԱՆ'")
 
         list_news_urls = []
@@ -386,7 +398,8 @@ class Command(BaseCommand):
                     content=content,
                     image=image,
                     category=category_politics,
-                    date_scraped=timezone.now()
+                    date_scraped=timezone.now(),
+                    urllib = urllib
                 )
                 print(f'Новость "{title}" успешно сохранена.')
             else:
@@ -478,6 +491,7 @@ class Command(BaseCommand):
 
     # Универсальная функция для сохранения новостей в базе данных
     def scrape_and_save_news(self, news_urls, category):
+        urllib = 'https://shamshyan.com/hy'
         headers = {
             'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.103 Safari/537.36'}
         for news_url in news_urls:
@@ -511,7 +525,8 @@ class Command(BaseCommand):
                     content=content,
                     image=full_image_url,
                     category=category,
-                    date_scraped=timezone.now()
+                    date_scraped=timezone.now(),
+                    urllib = urllib
                 )
                 print(f'Новость "{title}" успешно сохранена.')
             else:

@@ -1,0 +1,618 @@
+.menu-toggle {
+    display: none; /* Скрываем бургер-меню по умолчанию */
+}
+
+/* Стили для мобильных устройств */
+@media (max-width: 768px) {
+    /* Иконка бургер-меню */
+    .menu-toggle {
+        display: block;
+        width: 30px;
+        height: 24px;
+        position: relative;
+        cursor: pointer;
+    }
+
+    /* Создаем три полоски для бургер-меню */
+    .menu-toggle::before,
+    .menu-toggle::after,
+    .menu-toggle span {
+        content: '';
+        display: block;
+        width: 100%;
+        height: 3px;
+        background: linear-gradient(to right, #e74c3c, #ffa500);
+        position: absolute;
+        left: 0;
+        transition: all 0.3s ease;
+    }
+
+    .menu-toggle::before {
+        top: 0;
+    }
+
+    .menu-toggle span {
+        top: 50%;
+        transform: translateY(-50%);
+    }
+
+    .menu-toggle::after {
+        bottom: 0;
+    }
+
+    /* Анимация трансформации при активации меню */
+    .menu-toggle.active::before {
+        top: 50%;
+        transform: rotate(45deg);
+    }
+
+    .menu-toggle.active span {
+        opacity: 0;
+    }
+
+    .menu-toggle.active::after {
+        bottom: 50%;
+        transform: rotate(-45deg);
+    }
+
+    /* Настройка раскрывающегося меню */
+    .nav-links {
+        display: none;
+        flex-direction: column;
+        width: 100%;
+        background-color: #444;
+        position: absolute;
+        top: 70px; /* Открываем немного ниже, чтобы логотип был виден */
+        left: 0;
+        padding: 0;
+        margin: 0;
+        transition: max-height 0.5s ease-in-out;
+        overflow: hidden;
+        max-height: 0;
+        z-index: 1000;
+    }
+
+    /* Показ меню при активации */
+    .nav-links.active {
+        display: flex;
+        max-height: 500px;
+    }
+
+    /* Стили для пунктов меню */
+    .nav-links li {
+        margin: 0;
+        border-bottom: 1px solid #555;
+        text-align: center;
+    }
+
+    .nav-links li a {
+        display: block;
+        padding: 10px 5px;
+        color: #FFF;
+        text-decoration: none;
+        font-size: 16px;
+    }
+
+    .nav-links li a:hover {
+        background-color: #FFA500;
+        color: #000;
+    }
+
+    /* Стили для флагов */
+    .nav-links .flags {
+        display: flex; /* Располагаем флаги горизонтально */
+        justify-content: center;
+        padding: 10px 0;
+    }
+
+    .nav-links .flags li {
+        display: inline-block; /* Для флагов */
+        margin: 0 10px; /* Отступы между флагами */
+    }
+
+    .nav-links li img {
+        max-width: 20px;
+        height: auto;
+    }
+
+    /* Скрываем последние разделители */
+    .nav-links li:last-child {
+        border-bottom: none;
+    }
+}
+
+
+
+
+
+/* Стили для мобильных устройств */
+@media (max-width: 768px) {
+    .weather-currency-widget {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 20px;
+        background-color: #444; /* Темный фон для блока */
+        border-radius: 15px; /* Скругленные углы */
+        width: 100%; /* Блок на всю ширину экрана */
+        max-width: 350px; /* Ограничение максимальной ширины для компактности */
+        margin: 20px auto; /* Центрируем блок на экране */
+        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1); /* Добавляем тень для глубины */
+    }
+
+    /* Виджет погоды */
+    .weather-widget {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 10px;
+    }
+
+    .weather-widget img {
+        width: 50px; /* Размер иконки погоды */
+        height: 50px;
+        margin-right: 10px;
+    }
+
+    .weather-widget p {
+        font-size: 18px; /* Уменьшенный размер шрифта */
+        color: #FFA500; /* Цвет текста погоды */
+        margin: 0;
+    }
+
+    /* Виджет валют */
+    .currency-widget {
+        text-align: center;
+        width: 100%;
+        background-color: #333; /* Темный фон для виджета валют */
+        padding: 10px;
+        border-radius: 10px; /* Скругленные углы */
+    }
+
+    .currency-widget h4 {
+        font-size: 18px; /* Размер заголовка */
+        color: #FFA500; /* Оранжевый цвет для заголовка */
+        margin-bottom: 10px;
+    }
+
+    .currency-rates {
+        display: flex;
+        justify-content: space-between; /* Размещение валют */
+        width: 100%;
+        color: #FFF; /* Белый цвет текста для валют */
+    }
+
+    .currency-rates p {
+        font-size: 14px; /* Компактный размер текста для курсов валют */
+        margin: 5px 0;
+    }
+}
+
+
+
+
+@media (max-width: 768px) {
+    /* Контейнер для Telegram новостей */
+    .telegram-news-slider-container {
+        width: 100%;
+        padding: 15px;
+        background-color: #f4f4f4;
+        border-radius: 15px;
+        margin: 20px 0;
+    }
+
+    /* Заголовок */
+    .telegram-news-header {
+        text-align: center;
+        font-size: 15px;
+        color: #FF8C00;
+        margin-bottom: 15px;
+        background-color: #333;
+        padding: 10px;
+        border-radius: 10px;
+    }
+
+
+    /* Слайдер Telegram новостей */
+    .telegram-news-slider {
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        overflow: hidden;
+        background-color: #333;
+        padding: 10px;
+        border-radius: 15px;
+    }
+
+    /* Элементы слайдера */
+    .telegram-news-item {
+        display: none;
+        width: 100%;
+        text-align: center;
+        max-height: 500px; /* Ограничиваем общую высоту блока */
+        overflow: hidden;
+        position: relative;
+    }
+
+    /* Видео и изображения */
+    .telegram-news-media {
+        max-width: 100%;
+        max-height: 300px; /* Ограничение высоты для медиа */
+        height: auto;
+        border-radius: 10px;
+        margin-bottom: 10px;
+        object-fit: cover; /* Обрезка изображения или видео при превышении высоты */
+    }
+
+    /* Блок текста с прокруткой */
+    .telegram-news-text-container {
+        padding: 10px;
+        background-color: #333;
+        color: #fff;
+        border-radius: 10px;
+        max-height: 100px; /* Ограничение высоты текста */
+        overflow-y: auto;
+        display: block;
+    }
+
+    .telegram-news-text {
+        font-size: 16px;
+        line-height: 1.4;
+        color: #fff;
+        margin: 0;
+    }
+
+    /* Контейнер для блока новостей Telegram */
+    .telegram-news-content {
+        display: block;
+    }
+
+    /* Кнопки навигации */
+    .telegram-news-nav-btn {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        background-color: #FFA500;
+        border: none;
+        color: white;
+        font-size: 30px;
+        padding: 10px;
+        border-radius: 50%;
+        cursor: pointer;
+        z-index: 100;
+    }
+
+    .telegram-news-prev {
+        left: -20px;
+    }
+
+    .telegram-news-next {
+        right: -20px;
+    }
+
+    /* Поведение кнопок */
+    .telegram-news-nav-btn:focus {
+        outline: none;
+    }
+
+    .telegram-news-nav-btn:hover {
+        background-color: #FF8C00;
+    }
+
+    /* Поддержка видео */
+    .telegram-news-media video {
+        width: 100%;
+        max-height: 300px; /* Ограничение высоты видео */
+        height: auto;
+        border-radius: 10px;
+        object-fit: cover; /* Обрезка видео, если оно превышает высоту */
+    }
+}
+
+
+
+
+
+
+@media (max-width: 768px) {
+    /* Стили для блока заголовка категории */
+    .category-title {
+        text-align: center;
+        padding: 10px 0;
+        background-color: #333; /* Темный фон для контраста */
+        border-radius: 10px; /* Скругленные углы */
+        margin: 20px 0; /* Отступы сверху и снизу */
+    }
+
+    .category-title h3 {
+        font-size: 18px; /* Оптимальный размер шрифта для мобильных */
+        color: #FF8C00; /* Оранжевый цвет для заголовка */
+        margin: 0;
+    }
+}
+
+
+
+
+@media (max-width: 768px) {
+    /* Контейнер для пагинации */
+    .pagination {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 5px 0; /* Уменьшаем отступы */
+        background-color: #f4f4f4;
+        border-radius: 10px;
+        margin: 10px 0; /* Уменьшаем отступы сверху и снизу */
+    }
+
+    /* Стиль для ссылок пагинации */
+    .pagination .step-links a {
+        margin: 0 3px; /* Уменьшаем отступы между кнопками */
+        padding: 5px 10px; /* Уменьшаем внутренние отступы */
+        background-color: #333;
+        color: #fff;
+        text-decoration: none;
+        border-radius: 5px;
+        font-size: 12px; /* Уменьшаем размер шрифта */
+        display: inline-block;
+    }
+
+    .pagination .step-links a:hover {
+        background-color: #FFA500;
+        color: #000;
+    }
+
+    /* Стиль для активной (текущей) страницы */
+    .pagination .step-links .current {
+        background: linear-gradient(to right, #e74c3c, #ffa500);
+        color: #000;
+        padding: 5px 10px;
+        border-radius: 5px;
+        margin: 0 3px;
+        font-size: 12px; /* Уменьшаем размер шрифта */
+    }
+
+    /* Стиль для многоточия */
+    .pagination .step-links span {
+        padding: 5px 10px;
+        margin: 0 3px;
+        font-size: 12px; /* Уменьшаем размер шрифта */
+        color: #333;
+    }
+}
+
+
+@media (max-width: 768px) {
+    /* Контейнер для новостей */
+    .related-news {
+        padding: 10px;
+    }
+
+    /* Заголовки */
+    .related-news h2 {
+        font-size: 22px;
+        text-align: center;
+        margin-bottom: 15px;
+    }
+
+    .related-news h3 {
+        font-size: 18px;
+        margin: 10px 0;
+        text-align: left;
+        color: #FFA500;
+    }
+
+    /* Блоки новостей */
+    .news-list {
+        display: block;
+    }
+
+    .news-item {
+        display: flex;
+        flex-direction: row; /* Картинка и текст будут рядом */
+        background-color: #fff;
+        border-radius: 10px;
+        box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+        padding: 15px;
+        margin-bottom: 15px;
+    }
+
+    .news-item img {
+        width: 100%; /* Картинка займет 40% ширины */
+        height: auto; /* Автоматическая высота */
+        object-fit: cover;
+        border-radius: 10px;
+        margin-right: 10px;
+    }
+
+    .news-item p {
+        font-size: 16px; /* Увеличиваем шрифт для удобства */
+        color: #333;
+        margin: 0;
+        line-height: 1.4; /* Улучшаем читаемость текста */
+        flex: 1; /* Текст займет оставшееся пространство */
+        text-align: left;
+    }
+
+    /* Убираем горизонтальный скролл */
+    body {
+        overflow-x: hidden;
+    }
+}
+/* Стили для мобильных устройств */
+@media (max-width: 768px) {
+    .related-news h2 {
+        font-size: 24px; /* Увеличиваем шрифт для мобильных устройств */
+        text-align: center; /* Центрируем заголовок */
+        color: #FF8C00; /* Яркий цвет для выделения */
+        margin-bottom: 20px; /* Отступ снизу для пространства */
+        font-weight: bold; /* Жирный шрифт */
+    }
+}
+
+/* Стили для десктопа */
+@media (min-width: 769px) {
+    .related-news h2 {
+        font-size: 28px; /* Больше шрифт для десктопа */
+        text-align: left; /* Заголовок выровнен влево */
+        color: #333; /* Более спокойный цвет */
+        margin-bottom: 30px; /* Больше отступа снизу для лучшего восприятия на большом экране */
+        font-weight: bold; /* Жирный шрифт для четкости */
+        border-left: 5px solid #FF8C00; /* Добавляем цветную левую границу для акцента */
+        padding-left: 10px; /* Отступ слева для текста, чтобы граница не примыкала вплотную */
+    }
+}
+
+
+/* Основные стили для мобильных устройств с сохранением цветовой палитры */
+@media (max-width: 768px) {
+    /* Контейнер раздела */
+    .contact-section {
+        padding: 20px;
+        background: linear-gradient(45deg, #ffa500, #e74c3c);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        border-radius: 10px;
+    }
+
+    /* Контейнер для формы и контактной информации */
+    .contact-container {
+        background-color: #fff;
+        border-radius: 10px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        padding: 20px;
+        max-width: 100%;
+        width: 100%;
+        text-align: center;
+    }
+
+    /* Заголовок контактной страницы */
+    .contact-title {
+        font-size: 1.8rem;
+        color: #333;
+        margin-bottom: 20px;
+        font-family: 'Roboto', sans-serif;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+    }
+
+    /* Контактная информация */
+    .contact-info {
+        margin-bottom: 20px;
+        line-height: 1.5;
+    }
+
+    /* Заголовки для контактной информации */
+    .contact-info h2 {
+        font-size: 1.5rem;
+        color: #ffa500;
+        margin-bottom: 15px;
+        font-family: 'Roboto', sans-serif;
+    }
+
+    /* Текст для контактной информации */
+    .contact-info p {
+        font-size: 1rem;
+        color: #555;
+        margin-bottom: 10px;
+    }
+
+    /* Форма */
+    .contact-form {
+        max-width: 100%;
+        margin: 0 auto;
+        padding: 15px;
+        background-color: #f9f9f9;
+        border-radius: 8px;
+    }
+
+    /* Поля формы */
+    .form-group {
+        margin-bottom: 15px;
+        text-align: left;
+    }
+
+    .form-group label {
+        font-size: 1rem;
+        color: #333;
+        margin-bottom: 5px;
+        display: block;
+        font-weight: bold;
+    }
+
+    .form-group input,
+    .form-group textarea {
+        width: 100%;
+        padding: 10px;
+        font-size: 1rem;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        background-color: #f5f5f5;
+        outline: none;
+        transition: border-color 0.3s ease;
+    }
+
+    .form-group input:focus,
+    .form-group textarea:focus {
+        border-color: #007bff;
+        background-color: #fff;
+    }
+
+    /* Кнопка отправки формы */
+    .btn-primary {
+        width: 100%;
+        padding: 10px;
+        font-size: 1.1rem;
+        background: linear-gradient(45deg, #ffa500, #e74c3c);
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+
+    .btn-primary:hover {
+        background: linear-gradient(45deg, #e74c3c, #ffa500);
+        color: #333;
+    }
+
+    /* Уведомления */
+    .alert {
+        padding: 12px;
+        background-color: #dff0d8;
+        color: #3c763d;
+        border-radius: 5px;
+        font-size: 1rem;
+        text-align: center;
+    }
+
+    .messages {
+        margin: 15px 0;
+    }
+
+    /* Цвета и стили для текста */
+    .contact-container h2,
+    .contact-container p {
+        font-family: 'Roboto', sans-serif;
+        color: #555;
+    }
+}
+@media (max-width: 768px) {
+    .news-link {
+        font-size: 1rem; /* Увеличенный шрифт для мобильных устройств */
+        padding: 10px 0; /* Добавляем немного отступов сверху и снизу */
+        display: block; /* Ссылка будет занимать всю строку на экране */
+        text-align: left; /* Центрируем текст для удобного чтения */
+    }
+
+    .news-link:hover {
+        color: #00376b; /* Более тёмный цвет при наведении на мобильных устройствах */
+        text-decoration: underline; /* Оставляем подчеркивание при наведении */
+    }
+}

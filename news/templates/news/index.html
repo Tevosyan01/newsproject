@@ -17,6 +17,41 @@
 </div>
 {% endblock %}
 
+{% block telegram %}
+<div class="telegram-news-slider-container">
+    {% if telegram_news %}
+        <h2 class="telegram-news-header">Նորություններ Telegram-ից</h2>
+        <div class="telegram-news-slider">
+            <button id="telegram-prev-news" class="telegram-news-nav-btn telegram-news-prev">&#8249;</button>
+            <div id="telegram-news-content">
+                {% for tn in telegram_news %}
+                    <div class="telegram-news-item" style="display: none;">
+                        {% if tn.media_type == "Фото" %}
+                            <img src="{{ tn.media_file.url }}" alt="Telegram Photo" class="telegram-news-media">
+                        {% elif tn.media_type == "Видео" %}
+                            <video controls class="telegram-news-media">
+                                <source src="{{ tn.media_file.url }}" type="video/mp4">
+                                Ваш браузер не поддерживает видео-тег.
+                            </video>
+                        {% endif %}
+                        <div class="telegram-news-content">
+                            <div class="telegram-news-text-container">
+                                <p class="telegram-news-text">{{ tn.text }}</p>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+            <button id="telegram-next-news" class="telegram-news-nav-btn telegram-news-next">&#8250;</button>
+        </div>
+    {% else %}
+        <p>Новости отсутствуют.</p>
+    {% endif %}
+</div>
+{% endblock %}
+
+
+
 {% block categori_title %}
 	<div class="category-title">
     <h3>ԲՈԼՈՐ ՆՈՐՈՒԹՅՈՒՆՆԵՐԸ</h3>

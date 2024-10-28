@@ -3,83 +3,109 @@
 {% block content %}
 <main>
     <article class="news-detail">
-        <h1>{{ news_item.title }}</h1>
-        <p><em>{{ news_item.date_published }}</em></p>
-        <img src="{{ news_item.image }}" alt="{{ news_item.title }}">
-        <p>{{ news_item.content }}</p>
+    <h1>{{ news_item.title }}</h1>
+    <p><em>{{ news_item.date_published }}</em></p>
 
-        <!-- Обёрнем количество просмотров в блок с классом для стилей -->
-        <div class="views-count">
-            <span class="views-icon">👁️</span> Դիտումներ: {{ news_item.views }}
+    <!-- Блок для социальных иконок -->
+    <section class="social-share">
+        <div class="social-icons">
+{#        <p>Share</p>#}
+            <a href="https://www.facebook.com/sharer/sharer.php?u={{ request.build_absolute_uri }}" target="_blank">
+                <i class="fab fa-facebook"></i> <!-- Иконка Facebook -->
+            </a>
+            <a href="https://twitter.com/intent/tweet?url={{ request.build_absolute_uri }}" target="_blank">
+                <i class="fab fa-twitter"></i> <!-- Иконка Twitter -->
+            </a>
+            <a href="https://telegram.me/share/url?url={{ request.build_absolute_uri }}" target="_blank">
+                <i class="fab fa-telegram"></i> <!-- Иконка Telegram -->
+            </a>
+            <a href="https://www.instagram.com/?url={{ request.build_absolute_uri }}" target="_blank">
+                <i class="fab fa-instagram"></i> <!-- Иконка Instagram -->
+            </a>
         </div>
+    </section>
+
+    <img src="{{ news_item.image }}" alt="{{ news_item.title }}">
+    <p>{{ news_item.content }}</p>
+        {% if news_item.urllib %}
+        	<a href="{{ news_item.urllib }}" class="news-link">{{ news_item.urllib }}</a>
+        {% else %}
+
+        {% endif %}
+
+
+    <!-- Обёрнем количество просмотров в блок с классом для стилей -->
+    <div class="views-count">
+        <span class="views-icon">👁️</span> Դիտումներ: {{ news_item.views }}
+    </div>
     </article>
 
     <!-- Ряды с новостями по категориям -->
     <section class="related-news">
     <br>
     <br>
-        <h2>Վերջին նորությունները</h2>
-
-        <!-- Ряд для категории 'ԱՇԽԱՐՀ' -->
-        <div class="category-row">
-            <h3>ԱՇԽԱՐՀ</h3>
-            <div class="news-list">
-                {% for news in world_news %}
-                    <div class="news-item">
-                        <a href="{% url 'news_detail' news_id=news.id language=selected_language %}">
-                            <img src="{{ news.image }}" alt="{{ news.title }}">
-                            <p>{{ news.title|truncatewords:10 }}</p>
-                        </a>
-                    </div>
-                {% endfor %}
+    <h2>Վերջին նորությունները</h2>
+        <br>
+    <!-- Ряд для категории 'ԱՇԽԱՐՀ' -->
+    <div class="category-row">
+        <h3>ԱՇԽԱՐՀ</h3>
+        <div class="news-list">
+            {% for news in world_news %}
+            <div class="news-item">
+                <a href="{% url 'news_detail' news_id=news.id language=selected_language %}">
+                    <img src="{{ news.image }}" alt="{{ news.title }}">
+                    <p>{{ news.title|truncatewords:10 }}</p>
+                </a>
             </div>
+            {% endfor %}
         </div>
+    </div>
 
-        <!-- Ряд для категории 'ՀԱՅԱՍՏԱՆ' -->
-        <div class="category-row">
-            <h3>ՀԱՅԱՍՏԱՆ</h3>
-            <div class="news-list">
-                {% for news in armenia_news %}
-                    <div class="news-item">
-                        <a href="{% url 'news_detail' news_id=news.id language=selected_language %}">
-                            <img src="{{ news.image }}" alt="{{ news.title }}">
-                            <p>{{ news.title|truncatewords:10 }}</p>
-                        </a>
-                    </div>
-                {% endfor %}
+    <!-- Ряд для категории 'ՀԱՅԱՍՏԱՆ' -->
+    <div class="category-row">
+        <h3>ՀԱՅԱՍՏԱՆ</h3>
+        <div class="news-list">
+            {% for news in armenia_news %}
+            <div class="news-item">
+                <a href="{% url 'news_detail' news_id=news.id language=selected_language %}">
+                    <img src="{{ news.image }}" alt="{{ news.title }}">
+                    <p>{{ news.title|truncatewords:10 }}</p>
+                </a>
             </div>
+            {% endfor %}
         </div>
+    </div>
 
-        <!-- Ряд для категории 'ՍՊՈՐՏ' -->
-        <div class="category-row">
-            <h3>ՍՊՈՐՏ</h3>
-            <div class="news-list">
-                {% for news in sports_news %}
-                    <div class="news-item">
-                        <a href="{% url 'news_detail' news_id=news.id language=selected_language %}">
-                            <img src="{{ news.image }}" alt="{{ news.title }}">
-                            <p>{{ news.title|truncatewords:10 }}</p>
-                        </a>
-                    </div>
-                {% endfor %}
+    <!-- Ряд для категории 'ՍՊՈՐՏ' -->
+    <div class="category-row">
+        <h3>ՍՊՈՐՏ</h3>
+        <div class="news-list">
+            {% for news in sports_news %}
+            <div class="news-item">
+                <a href="{% url 'news_detail' news_id=news.id language=selected_language %}">
+                    <img src="{{ news.image }}" alt="{{ news.title }}">
+                    <p>{{ news.title|truncatewords:10 }}</p>
+                </a>
             </div>
+            {% endfor %}
         </div>
+    </div>
 
-        <!-- Ряд для категории 'ՄԱՍՆԱՎՈՐ' -->
-        <div class="category-row">
-            <h3>ԱՎԵԼԻՆ</h3>
-            <div class="news-list">
-                {% for news in more_news %}
-                    <div class="news-item">
-                        <a href="{% url 'news_detail' news_id=news.id language=selected_language %}">
-                            <img src="{{ news.image }}" alt="{{ news.title }}">
-                            <p>{{ news.title|truncatewords:10 }}</p>
-                        </a>
-                    </div>
-                {% endfor %}
+    <!-- Ряд для категории 'ՄԱՍՆԱՎՈՐ' -->
+    <div class="category-row">
+        <h3>ԱՎԵԼԻՆ</h3>
+        <div class="news-list">
+            {% for news in more_news %}
+            <div class="news-item">
+                <a href="{% url 'news_detail' news_id=news.id language=selected_language %}">
+                    <img src="{{ news.image }}" alt="{{ news.title }}">
+                    <p>{{ news.title|truncatewords:10 }}</p>
+                </a>
             </div>
+            {% endfor %}
         </div>
+    </div>
+</section>
 
-    </section>
 </main>
 {% endblock %}
