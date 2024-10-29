@@ -25,7 +25,7 @@ def scrape_news():
 timezone = pytz.timezone('Europe/Moscow')
 
 # Добавляем задачу: запуск каждые 5 минут
-scheduler.add_job(scrape_news, 'interval', minutes=1, timezone=timezone)
+scheduler.add_job(scrape_news, 'interval', minutes=15, timezone=timezone)
 
 # Сообщение о старте планировщика
 print("Планировщик запущен. Ждём выполнения задач...")
